@@ -1,68 +1,109 @@
 # 👁️ YOLOv8 Real-Time Object Detection & Recording App
 
-Bu proje, **Python**, **PyQt5** ve **YOLOv8** kullanılarak geliştirilmiş, gerçek zamanlı nesne tanımlama ve video kayıt yeteneğine sahip bir masaüstü uygulamasıdır. Kullanıcı dostu arayüzü sayesinde belirli nesne sınıflarını (insan, bardak, sandalye vb.) seçebilir ve tespit edilen görüntüleri anlık olarak yerel sürücünüze kaydedebilirsiniz.
+Bu proje, **Python**, **PyQt5** ve **YOLOv8** kullanılarak geliştirilmiş, gerçek zamanlı nesne tanımlama ve video kayıt yeteneğine sahip bir masaüstü uygulamasıdır.  
+Kullanıcı dostu arayüzü sayesinde belirli nesne sınıflarını (insan, bardak, sandalye vb.) seçebilir ve tespit edilen görüntüleri anlık olarak yerel sürücünüze kaydedebilirsiniz.
 
 ---
 
-## ✨ Öne Çıkan Özellikler
+## ✨ Özellikler
 
-* 🚀 **Gerçek Zamanlı Tespit:** Ultralytics YOLOv8 modelini kullanarak düşük gecikmeli nesne algılama.
-* 🎥 **Video Kayıt Sistemi:** Algılanan kareleri otomatik olarak `.mp4` formatında yüksek kalitede kaydeder.
-* 🖥️ **Modern Arayüz:** PyQt5 ile tasarlanmış, kullanımı kolay ve dinamik buton yönetimi.
-* 🎯 **Sınıf Filtreleme:** ComboBox üzerinden sadece ilgilendiğiniz nesneleri (Person, Cup, Chair) izleme imkanı.
-* 📂 **Otomatik Klasör Yönetimi:** Çıktı videolarını tarih ve saat damgasıyla belirlenen klasörde otomatik organize eder.
+- 🚀 **Gerçek Zamanlı Nesne Tespiti**  
+  YOLOv8 modeli ile düşük gecikmeli ve yüksek doğrulukta algılama.
+
+- 🎥 **Video Kayıt Sistemi**  
+  İşlenen görüntüler otomatik olarak `.mp4` formatında kaydedilir.
+
+- 🖥️ **Modern Grafik Arayüz**  
+  PyQt5 ile geliştirilmiş sade ve kullanıcı dostu tasarım.
+
+- 🎯 **Sınıf Bazlı Filtreleme**  
+  ComboBox üzerinden yalnızca seçilen nesneler (Person, Cup, Chair vb.) izlenebilir.
+
+- 📂 **Otomatik Klasör Yönetimi**  
+  Çıktı videoları tarih–saat damgasıyla klasörlenerek düzenli şekilde saklanır.
+
+- ⚙️ **Thread Destekli İşleme**  
+  QThread kullanımı sayesinde arayüz donmadan video işleme devam eder.
 
 ---
 
 ## 🛠️ Kullanılan Teknolojiler
 
-| Teknoloji | Kullanım Amacı |
-| :--- | :--- |
-| **Python** | Ana programlama dili |
-| **PyQt5** | Grafiksel Kullanıcı Arayüzü (GUI) tasarımı |
-| **OpenCV** | Video işleme ve görüntü format dönüştürme |
-| **YOLOv8** | Derin öğrenme tabanlı nesne tespiti |
-| **QThreading** | Arayüzün donmasını engellemek için eşzamanlı video işleme |
+| Teknoloji | Açıklama |
+|----------|----------|
+| Python | Ana programlama dili |
+| PyQt5 | GUI (Grafiksel Arayüz) geliştirme |
+| OpenCV | Video yakalama ve görüntü işleme |
+| YOLOv8 | Derin öğrenme tabanlı nesne tespiti |
+| NumPy | Görüntü veri işlemleri |
+| QThread | Eşzamanlı işlem yönetimi |
 
 ---
 
-## 🚀 Kurulum ve Çalıştırma
+## 🚀 Kurulum
 
-Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları takip edebilirsiniz:
+Projeyi yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları takip edin:
 
-### 1. Depoyu Klonlayın
+### 1️⃣ Repoyu Klonlayın
+
 ```bash
-git clone [https://github.com/kullaniciadi/proje-adi.git](https://github.com/kullaniciadi/proje-adi.git)
+git clone https://github.com/kullaniciadi/proje-adi.git
 cd proje-adi
-2. Gerekli Kütüphaneleri Yükleyin
-Bash
+```
+
+### 2️⃣ Gerekli Kütüphaneleri Kurun
+
+```bash
 pip install ultralytics PyQt5 opencv-python numpy
-3. Modeli ve UI Dosyasını Hazırlayın
-Model: yolov8n.pt dosyasının ana dizinde olduğundan emin olun (ilk çalıştırmada otomatik indirilir).
+```
 
-Arayüz: .ui dosya yolunun kod içerisindeki uic.loadUi kısmında (örneğin: C:\Users\...\nesneTanımlama.ui) kendi bilgisayarınıza göre doğru tanımlandığını kontrol edin.
+### 3️⃣ Model ve UI Dosyasını Kontrol Edin
 
-4. Uygulamayı Başlatın
-Bash
+- `yolov8n.pt` modeli ilk çalıştırmada otomatik indirilecektir.  
+- `.ui` dosya yolunun kod içinde doğru tanımlandığından emin olun:
+
+```python
+uic.loadUi("nesneTanımlama.ui", self)
+```
+
+---
+
+## ▶️ Uygulamayı Çalıştırma
+
+```bash
 python main.py
-📖 Kullanım Kılavuzu
-Kamera Başlatma: Uygulama açıldığında "Camera Start" butonuna basarak canlı yayını başlatın.
+```
 
-Nesne Seçimi: Açılır menüden (ComboBox) algılanmasını istediğiniz nesne tipini (person, cup, chair vb.) seçin.
+---
 
-Kayıt İşlemi: * "Record Start" butonuna basarak o anki işlenmiş görüntüyü videoya kaydetmeye başlayın.
+## 📖 Kullanım Kılavuzu
 
-Kayıt sırasında buton ismi "Record Stop" olarak değişecektir.
+1️⃣ **Camera Start** butonuna basarak kamerayı başlatın.  
+2️⃣ ComboBox üzerinden algılanmasını istediğiniz nesneyi seçin.  
+3️⃣ **Record Start** ile kayıt işlemini başlatın.  
+4️⃣ Kayıt sırasında buton adı **Record Stop** olarak değişir.  
+5️⃣ **Record Stop** ile video kaydını durdurabilirsiniz.  
+6️⃣ **Stop** butonu kamerayı tamamen kapatır.
 
-Durdurma: * "Record Stop" ile mevcut video kaydını bitirebilirsiniz.
+---
 
-"Stop" butonu ile kamerayı tamamen kapatabilir veya uygulamadan çıkış yapabilirsiniz.
+## 📁 Proje Yapısı
 
-📁 Dosya Yapısı
-main.py: Uygulamanın ana mantığı, buton kontrolleri ve GUI yönetimi burada yer alır.
+```
+project/
+│
+├── main.py                # GUI ve uygulama kontrol mekanizması
+├── video.py               # Kamera okuma ve YOLO işleme thread yapısı
+├── nesneTanımlama.ui      # Qt Designer arayüz dosyası
+├── output_videos/         # Kaydedilen videoların bulunduğu klasör
+└── README.md
+```
 
-video.py: Kamera okuma, YOLO modelini çalıştırma ve görüntü işleme süreçlerini yöneten VideoThread sınıfını içerir.
+---
 
-nesneTanımlama.ui: Qt Designer ile hazırlanmış, uygulamanın görsel arayüz tasarımı.
+## 🎯 Proje Amacı
 
-/output_videos: Kaydedilen videoların tarih-saat damgasıyla saklandığı varsayılan klasör.
+Bu uygulama, gerçek zamanlı görüntü işleme, derin öğrenme modeli entegrasyonu ve masaüstü arayüz geliştirme süreçlerini bir arada deneyimlemek amacıyla geliştirilmiştir.  
+Bilgisayarlı görü projeleri için temel bir altyapı sunar ve farklı YOLO modelleri ile kolayca genişletilebilir.
+
+---
